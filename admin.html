@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Réservations</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main{max-width:1100px;margin:2rem auto;padding:1rem}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:.6rem;border-bottom:1px solid #eee;text-align:left}
+    .actions{display:flex;gap:.5rem}
+    .small{font-size:.85rem;color:#666}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Admin — Réservations</h1>
+    <p class="small">Liste des réservations reçues (local)</p>
+    <div class="actions">
+      <button id="refresh">Actualiser</button>
+      <a id="export" href="/admin/export.csv">Télécharger CSV</a>
+    </div>
+    <div id="list" style="margin-top:1rem"></div>
+  </main>
+  <script>
+    async function fetchList(){
+      try{
+        const res = await fetch('/admin/reservations');
+        if(!res.ok) throw new Error('Erreur '+res.status);
+        const list = await res.json();
+        const container = document.getElementById('list');
+        if(!list.length) { container.innerHTML = '<p>Aucune réservation.</p>'; return; }
+        let html = '<table><thead><tr><th>ID</th><th>Nom</th><th>Email</th><th>Date</th><th>Heure</th><th>Créé</th></tr></thead><tbody>';
+        for(const r of list){
+          html += `<tr><td>${r.id}</td><td>${r.name}</td><td>${r.email}</td><td>${r.date}</td><td>${r.time}</td><td>${new Date(r.createdAt).toLocaleString()}</td></tr>`;
+        }
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      }catch(e){
+        document.getElementById('list').innerHTML = '<p>Impossible de charger les réservations ('+e.message+')</p>';
+      }
+    }
+    document.getElementById('refresh').addEventListener('click', fetchList);
+    fetchList();
+  </script>
+</body>
+</html>

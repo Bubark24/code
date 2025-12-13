@@ -1,0 +1,14 @@
+{
+  "name": "le-delice-site",
+  "version": "1.0.0",
+  "description": "Site vitrine du restaurant Le Délice",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

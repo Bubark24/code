@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Le Délice - Menu</title>
+    <meta name="description" content="Menu du restaurant Le Délice — Entrées, plats et desserts préparés maison">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+        <!-- Placeholder analytics (remplacez par GA4 ou Matomo) -->
+        <!-- JSON-LD menu -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Menu",
+            "name": "Menu Principal",
+            "url": "http://localhost:3000/menu.html"
+        }
+        </script>
+</head>
+<body>
+    <div id="page">
+    <header>
+        <h1>Restaurant Le Délice</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="#reservation">Réservation</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="home">
+        <h2>Bienvenue au Restaurant Le Délice</h2>
+        <img src="image/Sans titre.jpg" alt="interieur du resto" width="300" height="200">
+        <p>Découvrez nos plats délicieux et notre ambiance chaleureuse.</p>
+    </section>
+    <section id="menu">
+        <h2>Notre Menu</h2>
+        <div class="menu-section">
+            <h3>Entrées</h3>
+            <div class="menu-items-grid">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=800&q=80&auto=format&fit=crop" alt="Salade César" loading="lazy">
+                    <div class="menu-item-content">
+                        <h4>Salade César <span class="badge">Végétarien</span></h4>
+                        <p class="price">10€</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&q=80&auto=format&fit=crop" alt="Soupe à l'oignon" loading="lazy">
+                    <div class="menu-item-content">
+                        <h4>Soupe à l'oignon</h4>
+                        <p class="price">8€</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-section">
+            <h3>Plats Principaux</h3>
+            <div class="menu-items-grid">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&q=80&auto=format&fit=crop" alt="Filet de Boeuf" loading="lazy">
+                    <div class="menu-item-content">
+                        <h4>Filet de Boeuf</h4>
+                        <p class="price">25€</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&q=80&auto=format&fit=crop" alt="Saumon Grillé" loading="lazy">
+                    <div class="menu-item-content">
+                        <h4>Saumon Grillé</h4>
+                        <p class="price">20€</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-section">
+            <h3>Desserts</h3>
+            <div class="menu-items-grid">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?w=800&q=80&auto=format&fit=crop" alt="Tarte au Citron" loading="lazy">
+                    <div class="menu-item-content">
+                        <h4>Tarte au Citron</h4>
+                        <p class="price">8€</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=80&auto=format&fit=crop" alt="Mousse au Chocolat" loading="lazy">
+                    <div class="menu-item-content">
+                        <h4>Mousse au Chocolat</h4>
+                        <p class="price">7€</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <section id="reservation">
+        <h2>Réservez une Table</h2>
+        <form>
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <label for="time">Heure:</label>
+            <input type="time" id="time" name="time" required>
+            <button type="submit">Réserver</button>
+        </form>
+    </section>
+    <section id="contact">
+        <h2>Contactez-nous</h2>
+        <p>Email: contact@ledelice.com</p>
+        <p>Téléphone: 01 23 45 67 89</p>
+    </section>
+    <footer>
+        <p>&copy; 2025 Restaurant Le Délice. Tous droits réservés.</p>
+    </footer>
+    <script src="scripts.js" defer></script>
+    </div>
+</body>
+</html>

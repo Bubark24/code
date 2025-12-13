@@ -1,0 +1,639 @@
+/* ============================================
+   VARIABLES & RESET
+   ============================================ */
+
+:root {
+    --primary: #0d2b3e;
+    --secondary: #e85d3f;
+    --accent: #3ecf8e;
+    --light: #f5f5f7;
+    --dark: #1a1a1a;
+    --text: #2c3e50;
+    --text-light: #7f8c8d;
+    --gold: #d4a574;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f5f5f7 0%, #e8e8eb 100%);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* Conteneur centré global */
+#page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* ============================================
+   HEADER MODERNE
+   ============================================ */
+
+header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3a52 100%);
+    color: white;
+    padding: 2em 0;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(13, 43, 62, 0.3);
+    border-radius: 0 0 20px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 2.8em;
+    margin: 0.3em 0;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2.5em;
+    flex-wrap: wrap;
+    padding: 1em 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.7em 1.8em;
+    border-radius: 30px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 2px solid transparent;
+}
+
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    border-radius: 30px;
+    z-index: -1;
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover::before {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+nav ul li a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(232, 93, 63, 0.3);
+    color: white;
+}
+
+/* ============================================
+   SECTIONS & IMAGES
+   ============================================ */
+
+section {
+    padding: 4em 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+section#home img {
+    max-width: 500px;
+    width: 90%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+    margin: 1.5em 0;
+}
+
+.menu-item img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 1em;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+/* Carte de menu plus dynamique */
+.menu-section {
+    margin-top: 1em;
+}
+
+.menu-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(180deg, #ffffff, #fbfbfd);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(13,43,62,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(13,43,62,0.12);
+}
+
+.menu-item img:hover {
+    transform: scale(1.03);
+}
+
+.menu-item-content h4 {
+    margin: 0 0 6px 0;
+    font-size: 1.05rem;
+    color: var(--primary);
+}
+
+.menu-item-content p.price {
+    margin: 0;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 999px;
+    background: rgba(62,207,142,0.12);
+    color: var(--accent);
+    margin-left: 0.5rem;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+section#home {
+    background: linear-gradient(135deg, rgba(13, 43, 62, 0.9) 0%, rgba(232, 93, 63, 0.8) 100%),
+                url('image/Sans%20titre.jpg') center/cover;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(13, 43, 62, 0.3);
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    margin: 2em;
+}
+
+section#home h2 {
+    font-size: 3.2em;
+    font-weight: 700;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+section#home p {
+    font-size: 1.3em;
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* ============================================
+   MENU SECTION
+   ============================================ */
+
+section#menu {
+    background: linear-gradient(135deg, white 0%, var(--light) 100%);
+    text-align: center;
+    border-radius: 20px;
+    margin: 2em;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+section#menu h2 {
+    font-size: 2.8em;
+    color: var(--primary);
+    margin-bottom: 2em;
+    position: relative;
+    padding-bottom: 1em;
+}
+
+section#menu h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    border-radius: 2px;
+}
+
+section#menu ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2em;
+    padding: 0;
+}
+
+section#menu li {
+    background: white;
+    padding: 2em;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 5px solid var(--secondary);
+}
+
+section#menu li:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(232, 93, 63, 0.2);
+    border-left-color: var(--accent);
+}
+
+/* ============================================
+   RESERVATION SECTION
+   ============================================ */
+
+section#reservation {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3a52 100%);
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    margin: 2em;
+    box-shadow: 0 15px 50px rgba(13, 43, 62, 0.3);
+}
+
+section#reservation h2 {
+    font-size: 2.8em;
+    margin-bottom: 2em;
+    color: var(--accent);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3em;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form label {
+    font-weight: 600;
+    color: var(--gold);
+    text-align: left;
+    font-size: 0.95em;
+}
+
+form input, form button {
+    padding: 1.1em;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+form input {
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+form input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+form input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.18);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(62, 207, 142, 0.3);
+}
+
+form button {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 10px 30px rgba(232, 93, 63, 0.4);
+    border: none;
+}
+
+form button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 45px rgba(62, 207, 142, 0.4);
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+
+section#contact {
+    background: linear-gradient(135deg, var(--light) 0%, white 100%);
+    text-align: center;
+    border-radius: 20px;
+    margin: 2em;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+section#contact h2 {
+    font-size: 2.8em;
+    color: var(--primary);
+    margin-bottom: 2.5em;
+    position: relative;
+    padding-bottom: 1em;
+}
+
+section#contact h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    border-radius: 2px;
+}
+
+section#contact p {
+    font-size: 1.1em;
+    margin: 1.2em 0;
+    color: var(--text);
+}
+
+section#contact i {
+    color: var(--secondary);
+    margin-right: 0.8em;
+    font-size: 1.4em;
+}
+
+/* ============================================
+   SOCIAL ICONS
+   ============================================ */
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    margin-top: 2.5em;
+    flex-wrap: wrap;
+}
+
+.social-icons a {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5em;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icons a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: -1;
+    transition: left 0.3s ease;
+}
+
+.social-icons a:hover::before {
+    left: 0;
+}
+
+.fa-facebook {
+    background: linear-gradient(135deg, #3B5998, #1877F2);
+}
+
+.fa-twitter {
+    background: linear-gradient(135deg, #55ACEE, #00A8E8);
+}
+
+.fa-instagram {
+    background: linear-gradient(135deg, #E4405F, #FD1D1D);
+}
+
+.fa-linkedin {
+    background: linear-gradient(135deg, #0077B5, #00A0DF);
+}
+
+.social-icons a:hover {
+    transform: translateY(-8px) scale(1.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3a52 100%);
+    color: white;
+    text-align: center;
+    padding: 2.5em;
+    margin-top: 3em;
+    border-top: 3px solid var(--accent);
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    nav ul {
+        gap: 1em;
+        flex-direction: column;
+    }
+
+    section {
+        padding: 2.5em 1.5em;
+        margin: 1.5em 1em !important;
+    }
+
+    section#home {
+        min-height: auto;
+        gap: 1.5em;
+    }
+
+    section#home h2 {
+        font-size: 2.2em;
+    }
+
+    section#menu h2, 
+    section#reservation h2, 
+    section#contact h2 {
+        font-size: 2em;
+    }
+
+    section#menu ul {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        max-width: 100%;
+    }
+
+    section#home img {
+        max-width: 400px;
+        width: 85%;
+    }
+
+    .menu-item img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.6em;
+    }
+
+    header {
+        padding: 1.5em 0;
+    }
+
+    nav ul {
+        gap: 0.5em;
+        padding: 0.5em 0;
+    }
+
+    section {
+        padding: 1.5em 1em;
+        margin: 1em !important;
+    }
+
+    section#home h2 {
+        font-size: 1.8em;
+    }
+
+    section h2 {
+        font-size: 1.5em;
+    }
+
+    form input, form button {
+        padding: 0.9em;
+        font-size: 0.95em;
+    }
+
+    .social-icons {
+        gap: 1em;
+    }
+
+    .social-icons a {
+        width: 48px;
+        height: 48px;
+        font-size: 1.3em;
+    }
+
+    section#home img {
+        max-width: 280px;
+        width: 100%;
+    }
+
+    .menu-item img {
+        width: 120px;
+        height: 120px;
+        margin-right: 0;
+        margin-bottom: 1em;
+    }
+
+    .menu-item {
+        flex-direction: column;
+    }
+}
+
