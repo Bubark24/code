@@ -32,6 +32,33 @@ Langages et composants inclus
 - `Node.js` + `Express` (optionnel) pour servir le site localement (`server.js`)
 - Polices Google Fonts et Font Awesome pour les icônes
 
+## 🔧 Langages Supplémentaires Intégrés
+
+Pour démontrer l'utilisation de plusieurs langages de programmation, le projet inclut des scripts d'analyse des réservations dans différents langages :
+
+### Python
+- **Fichier** : `analyze_reservations.py`
+- **Utilisation** : Analyse les réservations et affiche des statistiques.
+- **Exécution** : `python analyze_reservations.py`
+- **Intégration** : Accessible via l'API `/api/analyze` (appelle le script Python depuis Node.js)
+
+### PHP
+- **Fichier** : `php_index.php`
+- **Utilisation** : Page d'accueil alternative générée par PHP.
+- **Note** : Nécessite un serveur PHP (comme Apache) pour être exécuté.
+
+### C#
+- **Fichier** : `AnalyzeReservations.cs`
+- **Utilisation** : Programme console pour analyser les réservations.
+- **Exécution** : `dotnet run AnalyzeReservations.cs` (nécessite .NET SDK)
+
+### Java
+- **Fichier** : `AnalyzeReservations.java`
+- **Utilisation** : Programme Java pour analyser les réservations.
+- **Exécution** : `javac AnalyzeReservations.java && java AnalyzeReservations` (nécessite JDK et Gson library)
+
+Ces scripts démontrent comment étendre les fonctionnalités du site avec d'autres langages de programmation.
+
 Installation et exécution locale
 
 1. Ouvrir PowerShell et se placer dans le dossier du projet :

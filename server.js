@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { exec } = require('child_process');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -18,8 +19,7 @@ app.use(express.static(path.join(__dirname)));
 
 // API: recevoir une réservation
 function adminAuth(req, res, next) {
-  const token = process.env.ADMIN_TOKEN;
-  if (!token) {
+  const token = process.env.ADMIN_TOKEN;  console.log('ADMIN_TOKEN défini:', !!token);  if (!token) {
     console.warn('ADMIN_TOKEN non d\u00e9fini — les routes admin sont accessibles en mode d\u00e9veloppement');
     return next();
   }
@@ -44,6 +44,7 @@ app.post('/api/reservations', (req, res) => {
       email,
       date,
       time,
+      confirmed: false,
       createdAt: new Date().toISOString()
     };
     list.push(item);
@@ -55,13 +56,35 @@ app.post('/api/reservations', (req, res) => {
   }
 });
 
-// Admin: lister les réservations (JSON)
-app.get('/admin/reservations', adminAuth, (req, res) => {
+// Confirmer une réservation
+app.put('/api/reservations/:id/confirm', adminAuth, (req, res) => {
+  const { id } = req.params;
   try {
     ensureDataFile();
     const list = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8')) || [];
+    const item = list.find(r => r.id == id);
+    if (!item) {
+      return res.status(404).json({ ok: false, error: 'Réservation non trouvée' });
+    }
+    item.confirmed = true;
+    fs.writeFileSync(DATA_FILE, JSON.stringify(list, null, 2), 'utf8');
+    return res.json({ ok: true, item });
+  } catch (err) {
+    console.error('Erreur confirmation réservation', err);
+    return res.status(500).json({ ok: false, error: 'Erreur serveur' });
+  }
+});
+
+// Admin: lister les réservations (JSON)
+app.get('/admin/reservations', (req, res) => {
+  console.log('Requête admin/reservations reçue');
+  try {
+    ensureDataFile();
+    const list = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8')) || [];
+    console.log('Réservations envoyées:', list.length);
     res.json(list);
   } catch (err) {
+    console.error('Erreur lecture réservations:', err);
     res.status(500).json({ error: 'Impossible de lire les données' });
   }
 });
@@ -89,6 +112,17 @@ app.get('/admin/export.csv', adminAuth, (req, res) => {
 // Admin UI
 app.get('/admin', adminAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
+// Analyser réservations avec Python
+app.get('/api/analyze', (req, res) => {
+  exec('python analyze_reservations.py', (error, stdout, stderr) => {
+    if (error) {
+      console.error('Erreur exécution Python:', error);
+      return res.status(500).json({ error: 'Erreur analyse' });
+    }
+    res.type('text/plain').send(stdout);
+  });
 });
 
 // fallback to index.html for other routes

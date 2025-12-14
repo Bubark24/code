@@ -27,22 +27,38 @@
     async function fetchList(){
       try{
         const res = await fetch('/admin/reservations');
-        if(!res.ok) throw new Error('Erreur '+res.status);
+        if(!res.ok) throw new Error('Erreur '+res.status + ': ' + res.statusText);
         const list = await res.json();
+        console.log('Réservations chargées:', list);
         const container = document.getElementById('list');
         if(!list.length) { container.innerHTML = '<p>Aucune réservation.</p>'; return; }
-        let html = '<table><thead><tr><th>ID</th><th>Nom</th><th>Email</th><th>Date</th><th>Heure</th><th>Créé</th></tr></thead><tbody>';
+        let html = '<table><thead><tr><th>ID</th><th>Nom</th><th>Email</th><th>Date</th><th>Heure</th><th>Créé</th><th>Statut</th><th>Actions</th></tr></thead><tbody>';
         for(const r of list){
-          html += `<tr><td>${r.id}</td><td>${r.name}</td><td>${r.email}</td><td>${r.date}</td><td>${r.time}</td><td>${new Date(r.createdAt).toLocaleString()}</td></tr>`;
+          const status = r.confirmed ? 'Confirmée' : 'En attente';
+          const actionBtn = r.confirmed ? '' : `<button onclick="confirmRes(${r.id})">Confirmer</button>`;
+          html += `<tr><td>${r.id}</td><td>${r.name}</td><td>${r.email}</td><td>${r.date}</td><td>${r.time}</td><td>${new Date(r.createdAt).toLocaleString()}</td><td>${status}</td><td>${actionBtn}</td></tr>`;
         }
         html += '</tbody></table>';
         container.innerHTML = html;
       }catch(e){
+        console.error('Erreur chargement:', e);
+        alert('Erreur chargement réservations: ' + e.message);
         document.getElementById('list').innerHTML = '<p>Impossible de charger les réservations ('+e.message+')</p>';
       }
     }
     document.getElementById('refresh').addEventListener('click', fetchList);
     fetchList();
+
+    async function confirmRes(id) {
+      try {
+        const res = await fetch(`/api/reservations/${id}/confirm`, { method: 'PUT' });
+        if (!res.ok) throw new Error('Erreur confirmation');
+        alert('Réservation confirmée !');
+        fetchList(); // Actualiser la liste
+      } catch (e) {
+        alert('Erreur lors de la confirmation: ' + e.message);
+      }
+    }
   </script>
 </body>
 </html>
